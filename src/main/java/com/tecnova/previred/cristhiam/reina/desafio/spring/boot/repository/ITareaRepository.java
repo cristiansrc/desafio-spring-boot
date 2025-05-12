@@ -1,0 +1,11 @@
+package com.tecnova.previred.cristhiam.reina.desafio.spring.boot.repository;
+
+import com.tecnova.previred.cristhiam.reina.desafio.spring.boot.repository.entity.TareaEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * Interface que describe la gestion de la tabla en base de datos
+ */
+@Repository
+public interface ITareaRepository extends JpaRepository<TareaEntity, Integer> { }

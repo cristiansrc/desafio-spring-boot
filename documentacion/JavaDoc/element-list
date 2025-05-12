@@ -1,0 +1,11 @@
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.config
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.data
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.exception
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.mapping
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.mapping.impl
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.repository
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.repository.entity
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.rest.impl
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.service
+com.tecnova.previred.cristhiam.reina.desafio.spring.boot.service.impl
