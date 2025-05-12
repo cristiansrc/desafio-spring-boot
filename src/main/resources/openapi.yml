@@ -1,0 +1,598 @@
+openapi: 3.0.4
+info:
+  title: API de Usuarios
+  description: API para gestionar usuarios en una plataforma
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /usuario:
+    get:
+      summary: Obtener todos los usuarios
+      operationId: obtenerUsuarios
+      tags:
+        - Usuario
+      security:
+        - auth: []
+      responses:
+        "200":
+          description: Lista de usuarios obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseListUsuarios"
+        "409":
+          description: No se pudo consultar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    post:
+      summary: Crear un nuevo usuario
+      operationId: crearUsuario
+      tags:
+        - Usuario
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+      responses:
+        "201":
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseId"
+        "409":
+          description: El usuario no se pudo almacenar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    put:
+      summary: Actualizar un usuario por ID
+      operationId: actualizarUsuario
+      tags:
+        - Usuario
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "409":
+          description: El usuario no se pudo almacenar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /usuario/login:
+    post:
+      summary: Iniciar session
+      operationId: loginUsuario
+      tags:
+        - Usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUsuario"
+      responses:
+        "200":
+          description: Login creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAuthUsuario"
+        "409":
+          description: El usuario no se encontro
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /usuario/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      operationId: obtenerUsuarioPorId
+      tags:
+        - Usuario
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Datos del usuario obtenido
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseUsuario"
+        "409":
+          description: El usuario no se pudo almacenar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    delete:
+      summary: Eliminar un usuario por ID
+      operationId: eliminarUsuario
+      tags:
+        - Usuario
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Usuario eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /tarea:
+    get:
+      summary: Obtener todos las tareas
+      operationId: obtenerTareas
+      tags:
+        - Tarea
+      security:
+        - auth: []
+      responses:
+        "200":
+          description: Lista de tareas obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseListTarea"
+        "404":
+          description: No se pudo consultar las tareas
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    post:
+      summary: Crear un nueva tarea
+      operationId: crearTarea
+      tags:
+        - Tarea
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tarea"
+      responses:
+        "201":
+          description: Tarea creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseId"
+        "404":
+          description: La tarea no se pudo almacenar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    put:
+      summary: Actualizar una tarea por ID
+      operationId: actualizarTarea
+      tags:
+        - Tarea
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tarea"
+      responses:
+        "200":
+          description: Tarea actualizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Tarea no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /tarea/{id}:
+    get:
+      summary: Obtener tarea por ID
+      operationId: obtenerTareaPorId
+      tags:
+        - Tarea
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Datos de la tarea obtenida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseTarea"
+        "404":
+          description: Tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    delete:
+      summary: Eliminar una tarea por ID
+      operationId: eliminarTarea
+      tags:
+        - Tarea
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Tarea eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /estado:
+    get:
+      summary: Obtener todos los estados de tarea
+      operationId: obtenerEstado
+      tags:
+        - Estado
+      security:
+        - auth: []
+      responses:
+        "200":
+          description: Lista de usuarios obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseListEstado"
+        "404":
+          description: Tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    post:
+      summary: Crear un nuevo estado de tarea
+      operationId: crearEstado
+      tags:
+        - Estado
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+      responses:
+        "201":
+          description: Estado de la tarea creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseId"
+        "404":
+          description: Tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    put:
+      summary: Actualizar un estado de la tarea por ID
+      operationId: actualizarEstado
+      tags:
+        - Estado
+      security:
+        - auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+      responses:
+        "200":
+          description: Estado tarea actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Estado tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+  /estado/{id}:
+    get:
+      summary: Obtener un estado de la tarea por ID
+      operationId: obtenerEstadoPorId
+      tags:
+        - Estado
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Datos del estado de la tarea obtenida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEstado"
+        "404":
+          description: Estado de la tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+    delete:
+      summary: Eliminar un estado tarea por ID
+      operationId: eliminarEstado
+      tags:
+        - Estado
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Estado tarea eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+        "404":
+          description: Estado tarea no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseGeneric"
+components:
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador único del usuario
+        nombre:
+          type: string
+          description: Nombre del usuario
+        correo:
+          type: string
+          format: email
+          description: Correo electrónico del usuario
+        contrasena:
+          type: string
+          format: password
+          description: Contraseña del usuario (debe ser encriptada)
+      required:
+        - id
+        - nombre
+        - apellido
+        - correo
+        - contraseña
+    Estado:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador único del estado de la tarea
+        nombre:
+          type: string
+          description: Nombre del estado de la tarea
+    Tarea:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador único de la tarea
+        nombre:
+          type: string
+          description: Nombre de la tarea
+        idEstado:
+          type: integer
+          description: Identificador único del estado de la tarea
+        nombreEstado:
+          type: string
+          description: Nombre del estado de la tarea
+    ResponseGeneric:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+    ResponseId:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        id:
+          type: integer
+          description: Id Generado
+    ResponseListEstado:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        estados:
+          type: array
+          items:
+            $ref: "#/components/schemas/Estado"
+    ResponseEstado:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        estado:
+          $ref: "#/components/schemas/Estado"
+    ResponseListTarea:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        tareas:
+          type: array
+          items:
+            $ref: "#/components/schemas/Tarea"
+    ResponseTarea:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        tarea:
+          $ref: "#/components/schemas/Tarea"
+    ResponseListUsuarios:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        tareas:
+          type: array
+          items:
+            $ref: "#/components/schemas/Usuario"
+    ResponseUsuario:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        usuario:
+          $ref: "#/components/schemas/Usuario"
+    LoginUsuario:
+      type: object
+      properties:
+        correo:
+          type: string
+          description: Correo para identificacion
+        contrasena:
+          type: string
+          description: Contraseña para identificacion
+    AuthUsuario:
+      type: object
+      properties:
+        authorization:
+          type: string
+          description: Token de session
+        usuario:
+          $ref: "#/components/schemas/Usuario"
+    ResponseAuthUsuario:
+      type: object
+      properties:
+        statusResponse:
+          type: integer
+          description: Codigo de respuesta
+        message:
+          type: string
+          description: Mensaje de respuesta
+        authUsuario:
+          $ref: "#/components/schemas/AuthUsuario"
